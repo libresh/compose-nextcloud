@@ -1,5 +1,7 @@
 # Nextcloud
 
+A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
+
 # How to use this image
 
 The easiest is to use our `docker-compose.yml`.
