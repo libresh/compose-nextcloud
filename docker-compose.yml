@@ -7,7 +7,7 @@ web:
   volumes_from:
     - app
   environment:
-    - HOST
+    - VIRTUAL_HOST
 app:
   image: indiehosters/nextcloud
   links:
