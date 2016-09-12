@@ -22,3 +22,18 @@ db:
     - ./mysql/runtime:/var/lib/mysql
   environment:
     - MYSQL_ROOT_PASSWORD
+cron:
+  image: indiehosters/nextcloud
+  links:
+    - db
+  volumes_from:
+    - app
+  user: www-data
+  entrypoint: |
+    bash -c 'bash -s <<EOF
+    trap "break;exit" SIGHUP SIGINT SIGTERM
+    while /bin/true; do
+      /usr/local/bin/php /var/www/html/cron.php
+      sleep 900
+    done
+    EOF'
