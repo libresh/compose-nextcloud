@@ -10,7 +10,7 @@ Make sure you have [docker-compose](http://docs.docker.com/compose/install/) ins
 
 ```bash
 git clone https://github.com/indiehosters/nextcloud.git
-cd pnextcloud
+cd nextcloud
 MYSQL_ROOT_PASSWORD=mystrongpassword docker-compose up
 ```
 
