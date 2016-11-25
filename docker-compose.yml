@@ -1,39 +1,55 @@
-web:
-  image: nginx
-  volumes:
-    - ./nginx.conf:/etc/nginx/nginx.conf:ro
-  links:
-    - app
-  volumes_from:
-    - app
-  environment:
-    - VIRTUAL_HOST
-app:
-  image: indiehosters/nextcloud
-  links:
-    - db
-  volumes:
-    - ./data/apps:/var/www/html/apps
-    - ./data/config:/var/www/html/config
-    - ./data/data:/var/www/html/data
-db:
-  image: mysql
-  volumes:
-    - ./mysql/runtime:/var/lib/mysql
-  environment:
-    - MYSQL_ROOT_PASSWORD
-cron:
-  image: indiehosters/nextcloud
-  links:
-    - db
-  volumes_from:
-    - app
-  user: www-data
-  entrypoint: |
-    bash -c 'bash -s <<EOF
-    trap "break;exit" SIGHUP SIGINT SIGTERM
-    while /bin/true; do
-      /usr/local/bin/php /var/www/html/cron.php
-      sleep 900
-    done
-    EOF'
+version: '2'
+networks:
+  lb_web:
+    external: true
+  back:
+    driver: bridge
+services:
+  web:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - app
+    volumes_from:
+      - app
+    environment:
+      - VIRTUAL_HOST
+    networks:
+    - back
+    - lb_web
+  app:
+    image: indiehosters/nextcloud
+    links:
+      - db
+    volumes:
+      - ./data/apps:/var/www/html/apps
+      - ./data/config:/var/www/html/config
+      - ./data/data:/var/www/html/data
+    networks:
+    - back
+  db:
+    image: mysql
+    volumes:
+      - ./mysql/runtime:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    networks:
+    - back
+  cron:
+    image: indiehosters/nextcloud
+    links:
+      - db
+    volumes_from:
+      - app
+    user: www-data
+    entrypoint: |
+      bash -c 'bash -s <<EOF
+      trap "break;exit" SIGHUP SIGINT SIGTERM
+      while /bin/true; do
+        /usr/local/bin/php /var/www/html/cron.php
+        sleep 900
+      done
+      EOF'
+    networks:
+    - back
