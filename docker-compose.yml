@@ -37,7 +37,7 @@ services:
     networks:
     - back
   cron:
-    image: indiehosters/nextcloud
+    image: nextcloud:11-fpm
     links:
       - db
     volumes_from:
