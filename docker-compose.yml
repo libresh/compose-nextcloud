@@ -19,7 +19,7 @@ services:
     - back
     - lb_web
   app:
-    image: indiehosters/nextcloud
+    image: nextcloud:11-fpm
     links:
       - db
     volumes:
