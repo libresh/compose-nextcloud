@@ -32,6 +32,7 @@ cat > ./data/config/config.php <<EOF
   'mail_smtpauthtype' => 'LOGIN',
   'mail_smtpname' => 'noreply.${URL}@${MAIL_DOMAIN}',
   'mail_smtppassword' => '${MAIL_PASS}',
+  'mail_smtpsecure' => 'tls',
   'memcache.local' => '\\OC\\Memcache\\APCu',
 );
 EOF
