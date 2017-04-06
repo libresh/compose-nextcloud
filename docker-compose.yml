@@ -31,7 +31,7 @@ services:
     networks:
     - back
   db:
-    image: mariadb
+    image: mysql
     volumes:
       - ./mysql/runtime:/var/lib/mysql:Z
     environment:
