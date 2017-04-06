@@ -8,7 +8,7 @@ services:
   web:
     image: nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro,z
     links:
       - app
     volumes_from:
@@ -18,20 +18,22 @@ services:
     networks:
     - back
     - lb_web
+    ports: 
+      - 80:80
   app:
     image: nextcloud:11-fpm
     links:
       - db
     volumes:
-      - ./data/apps:/var/www/html/apps
-      - ./data/config:/var/www/html/config
-      - ./data/data:/var/www/html/data
+      - ./data/apps:/var/www/html/apps:z
+      - ./data/config:/var/www/html/config:z
+      - ./data/data:/var/www/html/data:z
     networks:
     - back
   db:
-    image: mysql
+    image: mariadb
     volumes:
-      - ./mysql/runtime:/var/lib/mysql
+      - ./mysql/runtime:/var/lib/mysql:Z
     environment:
       - MYSQL_ROOT_PASSWORD
     networks:

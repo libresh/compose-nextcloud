@@ -16,6 +16,11 @@ MYSQL_ROOT_PASSWORD=mystrongpassword docker-compose up
 
 You can now access your instance on the port 80 of the IP of your machine (not recommended for production).
 
+Another option, is that you can also use a .env file
+````bash
+ cat MYSQL_ROOT_PASSWORD=mystrongpassword >> .env
+````
+
 ## Access it from Internet
 
 We recommend the usage of TLS, so the easiest is to use a TLS capable reverse proxy.
