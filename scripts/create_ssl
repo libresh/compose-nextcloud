@@ -1,0 +1,8 @@
+#/bin/bash
+mkdir -p $PWD/data/ssl/private
+chmod 700 $PWD/data/ssl/private
+mkdir -p $PWD/data/ssl/certs
+docker run -v $PWD/data/ssl:/work:Z -it nginx openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /work/private/nginx-selfsigned.key -out /work/certs/nginx-selfsigned.crt
+#docker run -v $PWD/data/ssl:/work:Z -it nginx openssl req -out /work/CSR.csr -new -newkey rsa:2048 -nodes -keyout /work/privateKey.key -days 365
+docker run -v $PWD/data/ssl:/work:Z -it nginx openssl dhparam -out /work/certs/dhparam.pem 2048
+#docker run -v $PWD/data/ssl:/work:Z -it nginx openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out /work/certificate.crt
