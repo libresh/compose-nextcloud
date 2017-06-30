@@ -1,60 +1,52 @@
 version: '2'
+
 networks:
-  lb_web:
+  proxy-tier:
     external: true
   back:
     driver: bridge
+
+volumes:
+  nextcloud:
+  db:
+
 services:
-  web:
-    image: nginx
-    volumes:
-      - ./nginx.ssl.conf:/etc/nginx/nginx.conf:ro,Z
-      - ./data/ssl:/etc/ssl:ro,Z
-    links:
-      - app
-    volumes_from:
-      - app
-    environment:
-      - VIRTUAL_HOST
-    networks:
-    - back
-    - lb_web
-    ports: 
-      - 80:80
-      - 443:443
-  app:
-    image: nextcloud:11-fpm
-    links:
-      - db
-    volumes:
-      - ./data/apps:/var/www/html/apps:z
-      - ./data/config:/var/www/html/config:z
-      - ./data/data:/var/www/html/data:z
-      - ./data/ssl:/etc/ssl:Z
-    networks:
-    - back
   db:
     image: mariadb
+    restart: always
     volumes:
-      - ./mysql/runtime:/var/lib/mysql:Z
+      - db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
     networks:
-    - back
-  cron:
-    image: nextcloud:11-fpm
+      - back
+
+  app:
+    image: nextcloud:fpm
     links:
       - db
+    volumes:
+      - nextcloud:/var/www/html
+    restart: always
+    networks:
+      - back
+
+  web:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - app
+    volumes:
+      - ./nginx.ssl.conf:/etc/nginx/nginx.conf:ro,Z
+      - ./ssl:/etc/ssl:ro,Z
     volumes_from:
       - app
-    user: www-data
-    entrypoint: |
-      bash -c 'bash -s <<EOF
-      trap "break;exit" SIGHUP SIGINT SIGTERM
-      while /bin/true; do
-        /usr/local/bin/php /var/www/html/cron.php
-        sleep 900
-      done
-      EOF'
+    restart: always
     networks:
-    - back
+      - back
+      - proxy-tier
