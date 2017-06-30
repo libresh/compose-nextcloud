@@ -34,7 +34,7 @@ You can now access your instance on the port 80 of the IP of your machine (not r
 
 ## Access it from Internet
 
-If you wish to access from the internet, it is recommended that you go here and get the latest and greatest from the official source. 
+If you wish to access from the internet, it is recommended that you go to the official [nextcloud docker] (https://github.com/nextcloud/docker).
 
 ## Installation
 
