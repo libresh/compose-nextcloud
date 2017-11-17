@@ -1,9 +1,11 @@
 version: '2'
 networks:
-  lb_web:
+  frontend-web:
     external: true
-  back:
+
+  backend:
     driver: bridge
+
 services:
   web:
     image: nginx
@@ -16,10 +18,10 @@ services:
     environment:
       - VIRTUAL_HOST
     networks:
-    - back
-    - lb_web
+    - backend
+    - frontend-web
   app:
-    image: nextcloud:12-fpm
+    image: nextcloud:9-fpm
     links:
       - db
     volumes:
@@ -27,17 +29,17 @@ services:
       - ./data/config:/var/www/html/config
       - ./data/data:/var/www/html/data
     networks:
-    - back
+    - backend
   db:
-    image: mysql
+    image: mariadb
     volumes:
-      - ./mysql/runtime:/var/lib/mysql
+      - ./mariadb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD
     networks:
-    - back
+    - backend
   cron:
-    image: nextcloud:12-fpm
+    image: nextcloud:9-fpm
     links:
       - db
     volumes_from:
@@ -52,4 +54,4 @@ services:
       done
       EOF'
     networks:
-    - back
+    - backend
