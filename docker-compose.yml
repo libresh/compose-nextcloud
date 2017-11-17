@@ -21,7 +21,7 @@ services:
     - backend
     - frontend-web
   app:
-    image: nextcloud:9-fpm
+    image: nextcloud:10-fpm
     links:
       - db
     volumes:
@@ -39,7 +39,7 @@ services:
     networks:
     - backend
   cron:
-    image: nextcloud:9-fpm
+    image: nextcloud:10-fpm
     links:
       - db
     volumes_from:
