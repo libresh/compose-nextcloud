@@ -1,0 +1,2 @@
+#!/bin/bash -eux
+docker-compose exec db bash -c 'mysql -uroot -p$MYSQL_ROOT_PASSWORD nextcloud -Bse "select uid from oc_group_user WHERE gid=\"admin\";"' | tail -n+2
