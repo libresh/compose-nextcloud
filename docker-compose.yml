@@ -30,6 +30,20 @@ services:
       - ./data/data:/var/www/html/data
     networks:
     - backend
+  onlyoffice-document-server:
+    image: onlyoffice/documentserver:latest
+    stdin_open: true
+    tty: true
+    env_file:
+      - onlyoffice.env
+    networks:
+      - frontend-web
+    expose:
+      - '80'
+      - '443'
+    volumes:
+      - ./only/data:/var/www/onlyoffice/Data
+      - ./only/log:/var/log/onlyoffice
   db:
     image: mariadb
     volumes:
