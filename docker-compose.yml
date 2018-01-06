@@ -15,8 +15,8 @@ services:
       - app
     volumes_from:
       - app
-    environment:
-      - VIRTUAL_HOST
+    env_file:
+      - frontend.env
     networks:
     - backend
     - frontend-web
