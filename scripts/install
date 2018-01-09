@@ -8,7 +8,7 @@ SUBNET=$(($var +1))
 
 echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" > .env
 echo "MYSQL_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> .env
-echo "NEXTCLOUD_ADMIN_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> .env
+echo "NEXTCLOUD_ADMIN_PASSWORD={NEXTCLOUD_ADMIN_PASSWORD}" >> .env
 echo "SUBNET=${SUBNET}" >> .env
 
 cat > mail.config.php <<EOF
