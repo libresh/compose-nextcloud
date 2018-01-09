@@ -23,13 +23,21 @@ services:
     - back
     - lb_web
   app:
-    image: nextcloud:12-fpm
+    build: .
     links:
       - db
     volumes:
       - ./data/apps:/var/www/html/apps
+      - ./data/custom_apps:/var/www/html/custom_apps
       - ./data/config:/var/www/html/config
       - ./data/data:/var/www/html/data
+    environment:
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD
+      - NEXTCLOUD_ADMIN_PASSWORD
+      - NEXTCLOUD_ADMIN_USER=indie
     networks:
     - back
   db:
