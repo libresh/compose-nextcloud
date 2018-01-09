@@ -4,6 +4,10 @@ networks:
     external: true
   back:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.0.${SUBNET}.0/24
 services:
   web:
     image: nginx
