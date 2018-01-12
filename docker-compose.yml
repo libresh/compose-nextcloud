@@ -29,6 +29,7 @@ services:
     volumes:
       - ./data/apps:/var/www/html/apps
       - ./data/config:/var/www/html/config
+      - ./data/custom_apps:/var/www/html/custom_apps
       - ./data/data:/var/www/html/data
     networks:
     - backend
