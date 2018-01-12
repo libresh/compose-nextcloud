@@ -20,6 +20,8 @@ services:
     networks:
     - backend
     - frontend-web
+    logging:
+      driver: none
   app:
     image: nextcloud:12-fpm
     links:
@@ -30,6 +32,8 @@ services:
       - ./data/data:/var/www/html/data
     networks:
     - backend
+    logging:
+      driver: none
   onlyoffice-document-server:
     image: onlyoffice/documentserver:latest
     stdin_open: true
@@ -44,6 +48,8 @@ services:
     volumes:
       - ./only/data:/var/www/onlyoffice/Data
       - ./only/log:/var/log/onlyoffice
+    logging:
+      driver: none
   db:
     image: mariadb
     volumes:
@@ -52,6 +58,8 @@ services:
       - MYSQL_ROOT_PASSWORD
     networks:
     - backend
+    logging:
+      driver: none
   cron:
     image: nextcloud:12-fpm
     links:
@@ -69,3 +77,5 @@ services:
       EOF'
     networks:
     - backend
+    logging:
+      driver: none
