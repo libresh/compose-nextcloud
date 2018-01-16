@@ -1,2 +1,2 @@
 FROM nextcloud:12-fpm
-COPY mail.config.php /usr/src/nextcloud/config/
+COPY /config/mail.config.php /usr/src/nextcloud/config/
