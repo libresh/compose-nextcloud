@@ -32,6 +32,13 @@ services:
       - ./data/config:/var/www/html/config
       - ./data/data:/var/www/html/data
     environment:
+      - MAIL_HOST
+      - MAIL_FROM
+      - MAIL_PASS
+      - MAIL_PORT
+      - URL
+      - MAIL_DOMAIN
+      - SMTP_NAME
       - MYSQL_DATABASE=nextcloud
       - MYSQL_HOST=db
       - MYSQL_USER=root

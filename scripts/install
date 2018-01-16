@@ -8,21 +8,12 @@ SUBNET=$(($var +1))
 echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" > .env
 echo "MYSQL_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> .env
 echo "SUBNET=${SUBNET}" >> .env
-
-cat > mail.config.php <<EOF
-<?php
-\$CONFIG = array (
-  'mail_domain' => '${MAIL_DOMAIN}',
-  'mail_from_address' => 'noreply.${URL}',
-  'mail_smtpmode' => 'smtp',
-  'mail_smtphost' => '${MAIL_HOST}',
-  'mail_smtpport' => '${MAIL_PORT}',
-  'mail_smtpauth' => 1,
-  'mail_smtpauthtype' => 'LOGIN',
-  'mail_smtpname' => 'noreply.${URL}@${MAIL_DOMAIN}',
-  'mail_smtppassword' => '${MAIL_PASS}',
-  'mail_smtpsecure' => 'tls',
-);
-EOF
+echo "MAIL_DOMAIN=${MAIL_DOMAIN}" >> .env
+echo "URL=${URL}" >> .env
+echo "MAIL_HOST=${MAIL_HOST}" >> .env
+echo "MAIL_PORT=${MAIL_PORT}" >> .env
+echo "MAIL_PASS=${MAIL_PASS}" >> .env
+echo "MAIL_FROM=noreply.${URL}" >> .env
+echo "SMTP_NAME=${MAIL_USER} >> .env
 
 
