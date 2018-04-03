@@ -14,6 +14,6 @@ echo "MAIL_HOST=${MAIL_HOST}" >> .env
 echo "MAIL_PORT=${MAIL_PORT}" >> .env
 echo "MAIL_PASS=${MAIL_PASS}" >> .env
 echo "MAIL_FROM=noreply.${URL}" >> .env
-echo "SMTP_NAME=${MAIL_USER} >> .env
+echo "SMTP_NAME=${MAIL_USER}" >> .env
 
 
