@@ -1,7 +1,7 @@
 <?php
 $CONFIG = array (
   'mail_domain' => getenv('MAIL_DOMAIN'),
-  'mail_from_address' => getenv('MAIL_DOMAIN'),
+  'mail_from_address' => getenv('MAIL_FROM'),
   'mail_smtpmode' => 'smtp',
   'mail_smtphost' => getenv('MAIL_HOST'),
   'mail_smtpport' => getenv('MAIL_PORT'),
