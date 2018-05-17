@@ -53,6 +53,10 @@ services:
       - MYSQL_ROOT_PASSWORD
     networks:
     - back
+  redis:
+    image: redis
+    networks:
+    - back
   cron:
     image: nextcloud:13-fpm
     links:
