@@ -7,7 +7,7 @@ $CONFIG = array (
   'mail_smtpport' => getenv('MAIL_PORT'),
   'mail_smtpauth' => 1,
   'mail_smtpauthtype' => 'LOGIN',
-  'mail_smtpname' => getenv('MAIL_DOMAIN'),
+  'mail_smtpname' => getenv('SMTP_NAME'),
   'mail_smtppassword' => getenv('MAIL_PASS'),
   'mail_smtpsecure' => 'tls',
 );
