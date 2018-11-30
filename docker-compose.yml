@@ -23,7 +23,7 @@ services:
     - back
     - lb_web
   app:
-    build: .
+    image: indiehosters/nextcloud:${NEXTCLOUD_VERSION:-latest}
     links:
       - db
     volumes:
@@ -46,7 +46,7 @@ services:
     networks:
     - back
   db:
-    image: mysql:5.7
+    image: mysql:${MYSQL_VERSION:-5.7}
     volumes:
       - ./mysql/runtime:/var/lib/mysql
     environment:
@@ -54,11 +54,11 @@ services:
     networks:
     - back
   redis:
-    image: redis
+    image: redis:${REDIS_VERSION:-latest}
     networks:
     - back
   cron:
-    image: nextcloud:13-fpm
+    image: indiehosters/nextcloud:${NEXTCLOUD_VERSION:-latest}
     links:
       - db
     volumes_from:
