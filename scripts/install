@@ -17,5 +17,5 @@ echo "MAIL_PASS=${MAIL_PASS}" >> .env
 echo "MAIL_FROM=noreply.${URL}" >> .env
 echo "SMTP_NAME=${MAIL_USER}" >> .env
 echo "NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}" >> .env
-echo "NEXTCLOUD_VERSION=14.0.4" >> .env
+echo "NEXTCLOUD_VERSION=14.0.4-fpm" >> .env
 echo "MYSQL_VERSION=5.7" >> .env
