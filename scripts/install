@@ -1,6 +1,7 @@
 #!/bin/bash -eux
 
 MYSQL_ROOT_PASSWORD=`tr -dc A-Za-z0-9_ < /dev/urandom | head -c 20 | xargs`
+NEXTCLOUD_ADMIN_PASSWORD=`tr -dc A-Za-z0-9_ < /dev/urandom | head -c 20 | xargs`
 
 var=$(for folder in `ls /data/domains`; do cat /data/domains/$folder/.env | grep SUBNET | cut -d"=" -f2; done | sort | tail -n1)
 SUBNET=$(($var +1))
@@ -15,5 +16,5 @@ echo "MAIL_PORT=${MAIL_PORT}" >> .env
 echo "MAIL_PASS=${MAIL_PASS}" >> .env
 echo "MAIL_FROM=noreply.${URL}" >> .env
 echo "SMTP_NAME=${MAIL_USER}" >> .env
-
+echo "NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}" >> .env
 
